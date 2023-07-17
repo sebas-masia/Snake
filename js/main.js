@@ -23,6 +23,8 @@ let foodX;
 let foodY;
 let score = 0;
 let changingDirection = false
+let startX;
+let startY;
 
 function main() {
     if (didGameEnd()) return;
@@ -39,7 +41,50 @@ function main() {
 
 main()
 createFood()
-document.addEventListener("keydown", changeDirection)    
+document.addEventListener("keydown", changeDirection)
+
+document.addEventListener("touchstart", function(event) {
+    // Get the touch start position
+    startX = event.touches[0].clientX;
+    startY = event.touches[0].clientY;
+  });
+  
+  // Add a touch end event listener
+document.addEventListener("touchend", function(event) {
+    // Get the touch end position
+    let endX = event.changedTouches[0].clientX;
+    let endY = event.changedTouches[0].clientY;
+  
+    // Calculate the distance and direction of the swipe
+    var deltaX = endX - startX;
+    var deltaY = endY - startY;
+    var absDeltaX = Math.abs(deltaX);
+    var absDeltaY = Math.abs(deltaY);
+    const goingUp = dy === -10
+    const goingDown = dy === 10
+    const goingRight = dx === 10
+    const goingLeft = dx === -10
+  
+    if (absDeltaX > absDeltaY) {
+      // Swipe in the horizontal direction
+      if (deltaX > 0) {
+        // Swipe right
+        if (!goingLeft) {dx = 10; dy = 0}
+      } else {
+        // Swipe left
+        if (!goingRight) {dx = -10; dy = 0}
+      }
+    } else {
+      // Swipe in the vertical direction
+      if (deltaY > 0) {
+        // Swipe down
+        if (!goingUp) {dx = 0; dy = 10}
+      } else {
+        // Swipe up
+        if (!goingDown) {dx = 0; dy = -10}
+      }
+    }
+  });
 
 function advanceSnake() {
     const head = {x: snake[0].x + dx, y: snake[0].y + dy}
