@@ -47,10 +47,11 @@ document.addEventListener("touchstart", function(event) {
     // Get the touch start position
     startX = event.touches[0].clientX;
     startY = event.touches[0].clientY;
-  });
-  
-  // Add a touch end event listener
-document.addEventListener("touchend", function(event) {
+});
+
+  // Add a touch end event listene
+
+  document.addEventListener("touchend", function(event) {
     // Get the touch end position
     let endX = event.changedTouches[0].clientX;
     let endY = event.changedTouches[0].clientY;
@@ -84,7 +85,7 @@ document.addEventListener("touchend", function(event) {
         if (!goingDown) {dx = 0; dy = -10}
       }
     }
-  });
+});
 
 function advanceSnake() {
     const head = {x: snake[0].x + dx, y: snake[0].y + dy}
