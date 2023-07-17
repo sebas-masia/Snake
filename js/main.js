@@ -51,7 +51,7 @@ document.addEventListener("touchstart", function(event) {
 
   // Add a touch end event listene
 
-  document.addEventListener("touchend", function(event) {
+document.addEventListener("touchend", function(event) {
     // Get the touch end position
     let endX = event.changedTouches[0].clientX;
     let endY = event.changedTouches[0].clientY;
